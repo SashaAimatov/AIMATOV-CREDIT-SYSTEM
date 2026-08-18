@@ -1,0 +1,1087 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AIMATOV CREDIT SYSTEM -- партнёр OZON BANK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f4f6fa;
+            color: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 44, 240, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 44, 240, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 44, 240, 0);
+            }
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* OZON-style header */
+        .ozon-header {
+            background: #002cf0;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInDown 0.6s ease;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .ozon-header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .ozon-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .ozon-header .logo-icon {
+            background: #fff;
+            color: #002cf0;
+            font-weight: 900;
+            font-size: 20px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: -0.5px;
+            transition: transform 0.3s;
+        }
+
+        .ozon-header .logo-icon:hover {
+            transform: rotate(-5deg) scale(1.05);
+        }
+
+        .ozon-header .logo-text {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .ozon-header .logo-text span {
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .ozon-header .partner-badge {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        /* Navigation tabs */
+        .nav-tabs {
+            background: #fff;
+            border-bottom: 2px solid #e8ecf4;
+            padding: 0 20px;
+            position: sticky;
+            top: 62px;
+            z-index: 999;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-tabs .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 0;
+        }
+
+        .nav-tab {
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #6a6a7e;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: 0.25s;
+            white-space: nowrap;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        .nav-tab:hover {
+            color: #002cf0;
+        }
+
+        .nav-tab.active {
+            color: #002cf0;
+            border-bottom-color: #002cf0;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInDown 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Hero OZON-style */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 50px 0 40px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h1 span {
+            color: #002cf0;
+            background: linear-gradient(135deg, #002cf0, #0044ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: #4a4a5e;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            max-width: 480px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #002cf0, #0044ff);
+            color: #fff;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 44, 240, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #002cf0;
+            padding: 14px 32px;
+            border: 2px solid #002cf0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f4ff;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            background: linear-gradient(135deg, #e8edff, #d4deff);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d4deff;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-image .big-number {
+            font-size: 72px;
+            font-weight: 900;
+            color: #002cf0;
+            line-height: 1;
+        }
+
+        .hero-image .big-number span {
+            font-size: 28px;
+            font-weight: 600;
+            color: #4a4a5e;
+        }
+
+        .hero-image p {
+            color: #4a4a5e;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 30px 0 40px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 24px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e8ecf4;
+            transition: 0.3s;
+            cursor: default;
+        }
+
+        .feature-card:hover {
+            border-color: #002cf0;
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0, 44, 240, 0.10);
+        }
+
+        .feature-card .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .feature-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #6a6a7e;
+            line-height: 1.4;
+        }
+
+        /* Steps */
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin: 30px 0 20px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding-bottom: 40px;
+        }
+
+        .step-card {
+            background: #fff;
+            padding: 28px 24px;
+            border-radius: 12px;
+            border: 1px solid #e8ecf4;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .step-card .num {
+            background: #002cf0;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .step-card:hover .num {
+            transform: scale(1.1);
+        }
+
+        .step-card .step-text h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .step-card .step-text p {
+            font-size: 14px;
+            color: #6a6a7e;
+            line-height: 1.4;
+        }
+
+        /* Terms */
+        .terms-block {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e8ecf4;
+            padding: 30px 32px;
+            margin: 20px 0 30px;
+        }
+
+        .terms-block h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        .terms-grid .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f2f8;
+        }
+
+        .terms-grid .item .label {
+            color: #6a6a7e;
+            font-size: 15px;
+        }
+
+        .terms-grid .item .value {
+            font-weight: 600;
+            color: #1a1a2e;
+            font-size: 15px;
+        }
+
+        .terms-grid .item .value.highlight {
+            color: #002cf0;
+        }
+
+        /* For borrowers */
+        .borrower-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            padding: 30px 0;
+        }
+
+        .borrower-card {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e8ecf4;
+            padding: 28px;
+            transition: 0.3s;
+        }
+
+        .borrower-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .borrower-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+
+        .borrower-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .borrower-card ul li {
+            padding: 8px 0;
+            color: #4a4a5e;
+            border-bottom: 1px solid #f0f2f8;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .borrower-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .borrower-card ul li .check {
+            color: #00a86b;
+            font-weight: 700;
+        }
+
+        /* Partner */
+        .partner-block {
+            background: linear-gradient(135deg, #f0f4ff, #e8edff);
+            border-radius: 12px;
+            padding: 28px 32px;
+            text-align: center;
+            border: 1px solid #d4deff;
+            margin: 20px 0 30px;
+        }
+
+        .partner-block .partner-label {
+            font-size: 14px;
+            color: #4a4a5e;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .partner-block .partner-name {
+            font-size: 26px;
+            font-weight: 800;
+            color: #002cf0;
+            margin: 6px 0 4px;
+        }
+
+        .partner-block .partner-desc {
+            font-size: 15px;
+            color: #4a4a5e;
+        }
+
+        /* Contacts */
+        .contacts-block {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e8ecf4;
+            padding: 30px 32px;
+            margin: 20px 0 30px;
+        }
+
+        .contacts-block h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        .contacts-grid .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f2f8;
+        }
+
+        .contacts-grid .item .label {
+            color: #6a6a7e;
+            font-size: 15px;
+        }
+
+        .contacts-grid .item .value {
+            font-weight: 600;
+            color: #1a1a2e;
+            font-size: 15px;
+        }
+
+        /* Disclaimer */
+        .disclaimer-block {
+            background: #fff8e6;
+            border-radius: 8px;
+            padding: 18px 24px;
+            border: 1px solid #ffe8b3;
+            margin: 20px 0 30px;
+            font-size: 13px;
+            color: #6a5a2e;
+            line-height: 1.6;
+        }
+
+        .disclaimer-block strong {
+            color: #cc7a00;
+        }
+
+        /* Footer */
+        .ozon-footer {
+            background: #1a1a2e;
+            color: #8a8aa0;
+            padding: 30px 0 20px;
+            margin-top: 30px;
+        }
+
+        .ozon-footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ozon-footer .footer-logo {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .ozon-footer .footer-logo span {
+            font-weight: 300;
+            opacity: 0.7;
+        }
+
+        .ozon-footer .footer-text {
+            font-size: 13px;
+            color: #6a6a80;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .ozon-footer .footer-divider {
+            width: 60px;
+            height: 2px;
+            background: #2a2a4a;
+            margin: 6px 0;
+        }
+
+        .ozon-footer .footer-copy {
+            font-size: 12px;
+            color: #4a4a60;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .hero-content h1 {
+                font-size: 34px;
+            }
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+            .borrower-info {
+                grid-template-columns: 1fr;
+            }
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-tabs {
+                top: 56px;
+            }
+            .nav-tab {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .ozon-header .container {
+                flex-wrap: wrap;
+                gap: 8px;
+                justify-content: center;
+            }
+            .ozon-header .logo-text {
+                font-size: 15px;
+            }
+            .ozon-header .partner-badge {
+                font-size: 10px;
+                padding: 4px 12px;
+            }
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+            .features {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .feature-card {
+                padding: 16px 12px;
+            }
+            .feature-card .icon {
+                font-size: 24px;
+            }
+            .feature-card h4 {
+                font-size: 14px;
+            }
+            .feature-card p {
+                font-size: 12px;
+            }
+            .terms-block {
+                padding: 20px 16px;
+            }
+            .terms-grid .item {
+                flex-direction: column;
+                gap: 2px;
+                padding: 8px 0;
+            }
+            .terms-grid .item .value {
+                font-size: 14px;
+            }
+            .partner-block .partner-name {
+                font-size: 20px;
+            }
+            .disclaimer-block {
+                font-size: 12px;
+                padding: 14px 16px;
+            }
+            .hero-image .big-number {
+                font-size: 48px;
+            }
+            .nav-tabs {
+                top: 52px;
+                padding: 0 10px;
+            }
+            .nav-tab {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .contacts-block {
+                padding: 20px 16px;
+            }
+            .contacts-grid .item {
+                flex-direction: column;
+                gap: 2px;
+                padding: 8px 0;
+            }
+            .borrower-card {
+                padding: 20px 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            .step-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- OZON-style header -->
+    <header class="ozon-header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">A</div>
+                <div class="logo-text">AIMATOV <span>CREDIT</span></div>
+            </div>
+            <div class="partner-badge">🤝 Партнёр OZON BANK</div>
+        </div>
+    </header>
+
+    <!-- Navigation tabs -->
+    <nav class="nav-tabs">
+        <div class="container">
+            <button class="nav-tab active" data-tab="main">Главная</button>
+            <button class="nav-tab" data-tab="borrowers">Заёмщикам</button>
+            <button class="nav-tab" data-tab="new">Новым клиентам</button>
+            <button class="nav-tab" data-tab="contacts">Контакты</button>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Tab: Main -->
+        <div class="tab-content active" id="tab-main">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Займы до <span>50 000 ₽</span><br>за 2 минуты</h1>
+                    <p>Онлайн-займ на карту без справок и поручителей. Решение мгновенное. Деньги сразу.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary">Оформить заём</a>
+                        <a href="#" class="btn-secondary">Узнать условия</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="big-number">50 000 <span>₽</span></div>
+                    <p>максимальная сумма займа</p>
+                    <div style="margin-top:12px; font-size:14px; color:#6a6a7e;">⏱ от 100 ₽ · от 1 дня</div>
+                </div>
+            </section>
+
+            <div class="features">
+                <div class="feature-card">
+                    <span class="icon">⚡</span>
+                    <h4>Мгновенно</h4>
+                    <p>Одобрение за 2 минуты, деньги сразу на карту</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📱</span>
+                    <h4>Всё онлайн</h4>
+                    <p>Никаких визитов в офис. Оформление с телефона</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📄</span>
+                    <h4>Без справок</h4>
+                    <p>Не нужны поручители и подтверждение дохода</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🔄</span>
+                    <h4>Повышаем лимит</h4>
+                    <p>Для надёжных клиентов -- больше денег и ниже процент</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Как получить заём</h2>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="num">1</div>
+                    <div class="step-text">
+                        <h4>Заполните форму</h4>
+                        <p>Укажите сумму и срок -- это займёт не больше 30 секунд</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="num">2</div>
+                    <div class="step-text">
+                        <h4>Дождитесь одобрения</h4>
+                        <p>Решение принимается автоматически за 2 минуты</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="num">3</div>
+                    <div class="step-text">
+                        <h4>Получите деньги</h4>
+                        <p>Сумма поступает на вашу карту мгновенно</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="terms-block">
+                <h3>Условия займа</h3>
+                <div class="terms-grid">
+                    <div class="item">
+                        <span class="label">Сумма</span>
+                        <span class="value">от 100 до 50 000 ₽</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">Срок</span>
+                        <span class="value">от 1 до 30 дней</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">Процентная ставка</span>
+                        <span class="value highlight">Фиксированная, индивидуальная</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">Штраф за просрочку (1-й день)</span>
+                        <span class="value">25% от суммы займа</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">Штраф за просрочку (со 2-го дня)</span>
+                        <span class="value highlight">40% от общей суммы (сложный процент с капитализацией)</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">Комиссии</span>
+                        <span class="value">50 ₽/платёж + 30 ₽/день + 100 ₽/уведомление</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="partner-block">
+                <div class="partner-label">Генеральный партнёр</div>
+                <div class="partner-name">OZON BANK</div>
+                <div class="partner-desc">Надёжность крупнейшей экосистемы и скорость AIMATOV CREDIT SYSTEM</div>
+            </div>
+        </div>
+
+        <!-- Tab: Borrowers -->
+        <div class="tab-content" id="tab-borrowers">
+            <h2 class="section-title">Заёмщикам</h2>
+            <div class="borrower-info">
+                <div class="borrower-card">
+                    <h4>📋 Ваш личный кабинет</h4>
+                    <ul>
+                        <li><span class="check">✅</span> Просмотр текущей задолженности</li>
+                        <li><span class="check">✅</span> График платежей с автоматическими напоминаниями</li>
+                        <li><span class="check">✅</span> История всех операций и начислений</li>
+                        <li><span class="check">✅</span> Возможность досрочного погашения</li>
+                        <li><span class="check">✅</span> Запрос на повышение лимита</li>
+                    </ul>
+                </div>
+                <div class="borrower-card">
+                    <h4>💰 Условия для постоянных клиентов</h4>
+                    <ul>
+                        <li><span class="check">⬆️</span> Повышение лимита до 50 000 ₽</li>
+                        <li><span class="check">📉</span> Снижение процентной ставки до 0,5% в день</li>
+                        <li><span class="check">⏱</span> Ускоренное одобрение за 30 секунд</li>
+                        <li><span class="check">🎁</span> Бонусы и кэшбэк за вовремя погашенные займы</li>
+                        <li><span class="check">🔄</span> Автопродление с лучшими условиями</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="terms-block">
+                <h3>Часто задаваемые вопросы</h3>
+                <div class="terms-grid">
+                    <div class="item">
+                        <span class="label">Как узнать остаток долга?</span>
+                        <span class="value">В личном кабинете или по запросу в ЛС</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">Можно ли продлить заём?</span>
+                        <span class="value">Да, за 24 часа до дедлайна</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">Что будет при просрочке?</span>
+                        <span class="value highlight">Начисление штрафов по ставке 25% и 40%</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">Как повысить лимит?</span>
+                        <span class="value">Верните 3 займа вовремя -- автоматически</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: New Clients -->
+        <div class="tab-content" id="tab-new">
+            <h2 class="section-title">Новым клиентам</h2>
+            <div class="hero" style="padding-top: 10px;">
+                <div class="hero-content">
+                    <h1>Первый заём -- <span>это просто</span></h1>
+                    <p>Мы создали систему, в которой легко разобраться с первого раза. Никаких сложных терминов и скрытых условий.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary">Попробовать сейчас</a>
+                    </div>
+                </div>
+                <div class="hero-image" style="animation: none; background: linear-gradient(135deg, #d4f0e8, #b8e6d8);">
+                    <div style="font-size: 60px;">🚀</div>
+                    <p style="font-weight: 600; color: #1a4a3e;">Первый заём без переплат</p>
+                    <p style="font-size: 14px;">При регистрации -- сниженный процент</p>
+                </div>
+            </div>
+            <div class="steps" style="padding-bottom: 20px;">
+                <div class="step-card">
+                    <div class="num">1</div>
+                    <div class="step-text">
+                        <h4>Заполните анкету</h4>
+                        <p>Это займёт 30 секунд. Нужен только номер телефона и карта</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="num">2</div>
+                    <div class="step-text">
+                        <h4>Получите одобрение</h4>
+                        <p>Мы не проверяем кредитную историю -- решение за 2 минуты</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="num">3</div>
+                    <div class="step-text">
+                        <h4>Пользуйтесь деньгами</h4>
+                        <p>Переводите, оплачивайте, используйте как хотите</p>
+                    </div>
+                </div>
+            </div>
+            <div class="partner-block" style="background: linear-gradient(135deg, #e8f4f0, #d4e8e0);">
+                <div class="partner-label">Для новых клиентов</div>
+                <div class="partner-name" style="color: #1a6a5a;">Сниженная ставка 0,8% в день</div>
+                <div class="partner-desc">При первом займе до 10 000 ₽ -- минимальная переплата</div>
+            </div>
+        </div>
+
+        <!-- Tab: Contacts -->
+        <div class="tab-content" id="tab-contacts">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contacts-block">
+                <h3>Свяжитесь с нами</h3>
+                <div class="contacts-grid">
+                    <div class="item">
+                        <span class="label">📧 Email</span>
+                        <span class="value">sasaajmatov1@gmail.com</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">📞 Телефон</span>
+                        <span class="value">8 (800) 555-XX-XX</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">📍 Адрес</span>
+                        <span class="value">Каменск-Уральский, ул. Московская, д. 1</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">🕐 Часы работы</span>
+                        <span class="value">Круглосуточно, без выходных</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">💬 ЛС</span>
+                        <span class="value">Ответ в течение 5 минут</span>
+                    </div>
+                    <div class="item">
+                        <span class="label">📱 Соцсети</span>
+                        <span class="value">@aimatov_credit</span>
+                    </div>
+                </div>
+            </div>
+            <div class="partner-block" style="background: linear-gradient(135deg, #f0f0ff, #e4e4f8);">
+                <div class="partner-label">Наш генеральный партнёр</div>
+                <div class="partner-name">OZON BANK</div>
+                <div class="partner-desc">Надёжность и безопасность каждой операции</div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer-block">
+            <strong>⚠️ Важно:</strong> Данный сайт является демонстрационным материалом.
+            ПАО «AIMATOV CREDIT SYSTEM» -- <strong>вымышленная финансовая организация</strong>,
+            созданная исключительно в ознакомительных целях.
+            Все описания продуктов и условий носят условный характер.
+            Реальные финансовые услуги оказываются только лицензированными банками и МФО в соответствии с законодательством Российской Федерации.
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="ozon-footer">
+        <div class="container">
+            <div class="footer-logo">AIMATOV <span>CREDIT SYSTEM</span></div>
+            <div class="footer-divider"></div>
+            <div class="footer-text">
+                Каменск-Уральский, ул. Московская, д. 1<br>
+                8 (800) 555-XX-XX · sasaajmatov1@gmail.com
+            </div>
+            <div class="footer-copy">© 2026 ПАО «AIMATOV CREDIT SYSTEM». Все права защищены.</div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = {
+                main: document.getElementById('tab-main'),
+                borrowers: document.getElementById('tab-borrowers'),
+                new: document.getElementById('tab-new'),
+                contacts: document.getElementById('tab-contacts')
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Убираем active у всех вкладок
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Скрываем все контенты
+                    Object.values(contents).forEach(c => c.classList.remove('active'));
+
+                    // Показываем нужный
+                    const tabName = this.dataset.tab;
+                    if (contents[tabName]) {
+                        contents[tabName].classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+```
